@@ -3,9 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSeb.Library.Management.ConsoleApp", "src_console\TSeb.Library.Management.ConsoleApp\TSeb.Library.Management.ConsoleApp.csproj", "{BD770A62-E63D-4BD6-9632-AA33FED01510}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console App", "Console App", "{54D7F3AC-070E-415E-8115-B8CAAA08ABCE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD770A62-E63D-4BD6-9632-AA33FED01510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD770A62-E63D-4BD6-9632-AA33FED01510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD770A62-E63D-4BD6-9632-AA33FED01510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD770A62-E63D-4BD6-9632-AA33FED01510}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BD770A62-E63D-4BD6-9632-AA33FED01510} = {54D7F3AC-070E-415E-8115-B8CAAA08ABCE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {926B52BB-4B40-4577-9AB8-CF8EF4230064}
