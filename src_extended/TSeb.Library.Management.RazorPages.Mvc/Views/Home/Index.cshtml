@@ -1,0 +1,80 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Shelf</h1>
+    <!--TODO: Use a View Component or at leasta partial-->
+    <div class="container ">
+        <div class="d-flex justify-content-center">
+            @foreach (var item in @Model.Books)
+            {
+                <div>
+                    <div class="card m-2 float-left" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span>Book: </span>@item?.Title</h5>
+                            @if (item.Authors.Length > 1)
+                            {
+                                <span>Authors: </span>
+                            }
+                            else
+                            {
+                                <span>Author: </span>
+                            }
+
+                            @foreach (var author in item.Authors)
+                            {
+                                <span class="card-subtitle mb-2 text-muted">@author,</span>
+                            }
+                            <p class="card-text m-0 p-0"><span>ISBN: </span><em>@item.ISBN</em></p>
+                            <p class="card-text"><span>In Stock: </span><b>@item.StockQuantity</b></p>
+                            <img src="@item.Thumbnail" alt="thumbnail" class="img-fluid imageThumbnail rounded float-left mx-auto d-block h-25">
+                            @if(item.StockQuantity > 0){
+                                <a class="btn btn-primary m-1" asp-controller="Rentals" asp-action="Rent"
+                                   asp-route-id="@item.Id">Rent</a>
+                            }
+                           
+                            <a class="btn btn-primary m-1" asp-controller="Books" asp-action="Details"
+                               asp-route-id="@item.Id">Details</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <h1 class="display-4">Rented</h1>
+
+    <!--TODO: Use a View Component or at leasta partial-->
+    <div class="container ">
+        <div class="d-flex justify-content-center">
+            <table class="table">
+                <tr class="m-5">
+                    <th scope="col">Title</th>
+                    <th scope="col">Renter</th>
+                    <th scope="col">Charge rate</th>
+                    <th scope="col">Rent date</th>
+@*                    <th scope="col">Return Date</th>
+*@                </tr>
+                @foreach (var item in @Model.Rentals)
+                {
+                    <tr>
+                        <td>@Model.Books?.FirstOrDefault(b=>b.Id == item.Item.Id)?.Title</td>
+                        <td>@item.RenterName</td>
+                        <td>@item.TaxCharge</td>
+                        <td>@item.RentDate</td>
+@*                        <td>@item.</td>
+*@                        <td>
+                            <a class="btn btn-primary m-1" asp-controller="Rentals" asp-action="Returned"
+                               asp-route-id="@item.RentalId">Return</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

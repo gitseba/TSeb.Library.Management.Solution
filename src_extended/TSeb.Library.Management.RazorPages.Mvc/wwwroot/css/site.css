@@ -1,0 +1,34 @@
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    font-size: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#main-container {
+    overflow-y: auto;
+    height: calc(100% - 60px);
+    margin-top: 40px; /*Navbar*/
+    margin-bottom: 20px; /*Footer*/
+    padding: 4px;
+}
+
+.imageThumbnail {
+    height: 100px;
+    width: auto;
+    max-width: 150px;
+    max-height: 150px;
+}

@@ -1,0 +1,36 @@
+﻿@model BookVm_Details
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Title</h1>
+                @foreach (var author in Model.Authors)
+                {
+                    <p>@author</p>
+                }
+              
+            </div>
+
+            <div class="card-body text-center">
+                <!--asp-append-version="true" serves as Reloading the image only if it changes on the server.
+                If it's not being changed, take it from webcache-->
+                <img class="card-img-top imageThumbnail rounded mx-auto"
+                     src=@Model.Thumbnail
+                     asp-append-version="true" />
+
+                <h5>Book ISBN: @Model.ISBN</h5>
+            </div>
+
+            <div class="card-footer text-center">
+
+                <!--Back to Home index-->
+                <a asp-controller="Home" asp-action="index" class="btn btn-primary m-1">Back</a>
+                @if(Model.StockQuantity > 0){
+                    <a class="btn btn-primary m-1" asp-controller="Rentals" asp-action="Rent"
+                       asp-route-id="@Model.BookId">Rent</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

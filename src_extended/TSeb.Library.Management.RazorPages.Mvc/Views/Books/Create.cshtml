@@ -1,0 +1,107 @@
+﻿@using TSeb.Library.Management.RazorPages.Mvc.Models;
+@model BookVm
+
+<div class="container">
+    <!--Create employee form. To suport file upload we need to use: enctype="multipart/form-data"-->
+    <form enctype="multipart/form-data" asp-controller="Books" asp-action="Create" method="post" class="mt-3">
+
+        <!--Name-->
+        <div class="form-group row m-1">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Title"></label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Title" class="form-control" placeholder="Name" />
+                <span class="text-danger" asp-validation-for="@Model.Title"></span>
+            </div>
+        </div>
+
+        <div class="form-group row m-1">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Authors">Author(s)</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.Authors" class="form-control" placeholder="Author" />
+                <span class="text-danger" asp-validation-for="@Model.Authors"></span>
+            </div>
+        </div>
+
+        <div class="form-group row m-1">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.ISBN">ISBN</label>
+            <div class="col-sm-10">
+                <input asp-for="@Model.ISBN" class="form-control" placeholder="ISBN" />
+                <span class="text-danger" asp-validation-for="@Model.ISBN"></span>
+            </div>
+        </div>
+
+        <!--CHOOSE ANOTHER PROFILE PHOTO-->
+        <div class="form-group row m-1">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Thumbnail">Thumbnail</label>
+            <div class="col-sm-10">
+                <div class="custom-file">
+                    <input asp-for="@Model.Thumbnail" class="form-control custom-file-input" placeholder="Select a profile photo" />
+                </div>
+            </div>
+        </div>
+
+        <!--PROFILE PHOTO-->
+        <div class="form-group row col-sm-4 offset-4 m-1">
+
+            <div class="row">
+                <!--NEW PHOTO-->
+
+                <div class="col ">
+
+                    <h6>Thumbnail</h6>
+                    <div id="imgPreview" class="thumbnail rounded border" style="display:flex; justify-content:center;">
+                        <img class="card-img-top imageThumbnail rounded" id="targetImg" asp-append-version="true" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!--Create button-->
+        <div class="form-group row m-1">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+
+        @section CustomScripts {
+
+            <script src="~/lib/jquery/jquery.js"></script>
+
+            <!--This will change the text in PhotoPath to the name of the photo-->
+            <script>
+                $(document).ready(function () {
+                    $('.custom-file-input').on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).next('.custom-file-label').html(fileName);
+
+                        var File = this.files;
+                        if (File && File[0]) {
+                            ReadImage(File[0]);
+                        }
+                    });
+                });
+            </script>
+
+            <script>
+                var ReadImage = function (file) {
+                    var reader = new FileReader;
+                    var image = new Image;
+
+                    reader.readAsDataURL(file);
+                    reader.onload = function (_file) {
+
+                        image.src = _file.target.result;
+                        image.onload = function () {
+
+                            $("#targetImg").attr('src', _file.target.result);
+                            $("#imgPreview").show();
+                        }
+                    }
+                }
+            </script>
+        }
+
+    </form>
+</div>

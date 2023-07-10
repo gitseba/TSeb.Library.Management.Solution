@@ -1,0 +1,61 @@
+﻿@model RentalViewModel
+
+<div class="container">
+    <!--Create employee form. To suport file upload we need to use: enctype="multipart/form-data"-->
+    <form enctype="multipart/form-data" asp-controller="Rentals" asp-action="Rent" method="post" class="mt-3">
+
+        <div class="container ">
+            <div class="d-flex justify-content-center">
+                <input type="hidden" value="@Model.Rental.Item.Id" name="ItemId" />
+                <div>
+                    <div class="card m-2 float-left" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><span>Book: </span>@Model.Rental.Item?.Title</h5>
+                            @if (@Model.Rental.Item.Authors.Length > 1)
+                            {
+                                <span>Authors: </span>
+                            }
+                            else
+                            {
+                                <span>Author: </span>
+                            }
+
+                            @foreach (var author in Model.Rental.Item.Authors)
+                            {
+                                <span class="card-subtitle mb-2 text-muted">@author,</span>
+                            }
+                            <p class="card-text m-0 p-0"><span>ISBN: </span><em>@Model.Rental.Item.ISBN</em></p>
+                            <img src="@Model.Rental.Item.Thumbnail" alt="thumbnail" class="img-fluid imageThumbnail rounded float-left mx-auto d-block h-25">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--Renters Name-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Rental.RenterName"></label>
+            <div class="col-sm-10">
+                <input name="RenterName" class="form-control" placeholder="Name of the renter" />
+                <span class="text-danger" asp-validation-for="@Model.Rental.RenterName"></span>
+            </div>
+        </div>
+
+        <!--Renters Name-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="@Model.Rental.TaxCharge"></label>
+            <div class="col-sm-10">
+                <input name="TaxCharge" class="form-control" placeholder="Tax charge" />
+                <span class="text-danger" asp-validation-for="@Model.Rental.TaxCharge"></span>
+            </div>
+        </div>
+
+        <!--Rent button-->
+        <div class="form-group row m-1">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Rent</button>
+            </div>
+        </div>
+
+    </form>
+</div>
