@@ -13,7 +13,7 @@
             @foreach (var item in @Model.Books)
             {
                 <div>
-                    <div class="card m-2 float-left" style="width: 18rem;">
+                    <div class="card m-2 float-left @(item.StockQuantity == 0 ? "border-danger" : "border")" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title"><span>Book: </span>@item?.Title</h5>
                             @if (item.Authors.Length > 1)

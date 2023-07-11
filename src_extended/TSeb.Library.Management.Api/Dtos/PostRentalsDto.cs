@@ -17,6 +17,6 @@
         /// </summary>
         public int ItemId { get; set; }
 
-        public string RentDate { get; set; }
+        public string RentDate => DateTime.Now.ToShortDateString();
     }
 }
