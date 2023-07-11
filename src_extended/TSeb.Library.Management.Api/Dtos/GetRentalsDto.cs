@@ -25,6 +25,8 @@ namespace TSeb.Library.Management.Api.Dtos
         /// </summary>
         public DateTime RentDate { get; set; }
 
+        public DateTime DueDate { get; set; }
+
         /// <summary>
         /// Object that is being rent
         /// </summary>

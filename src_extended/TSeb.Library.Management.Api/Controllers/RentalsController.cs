@@ -29,7 +29,8 @@ namespace TSeb.Library.Management.Api.Controllers
                     TaxCharge = r.TaxCharge,
                     RentalId = r.RentalId,
                     RenterName = r.RenterName,
-                    RentDate = r.RentDate//DateTime.Parse(DateTime.Now.ToString("g"))
+                    RentDate = r.RentDate,//DateTime.Parse(DateTime.Now.ToString("g"))
+                    DueDate = r.DueDate
                 });
 
             return rentals == null ? NoContent() : Ok(rentals);
@@ -48,18 +49,19 @@ namespace TSeb.Library.Management.Api.Controllers
                 },
                 TaxCharge = rental.TaxCharge,
                 RenterName = rental.RenterName,
-                RentDate = DateTime.Parse(rental.RentDate)
+                RentDate = DateTime.Parse(rental.RentDate),
             };
+            mapped.DueDate = DateTime.Parse(mapped.RentDate.AddDays(14).ToString("g"));
             _rentalsRepo.Create(mapped);
 
             return CreatedAtRoute(nameof(GetRentals), new { Id = mapped.RentalId }, mapped);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteRental(int id)
+        public IReadOnlyList<RentalModel> DeleteRental(int id)
         {
             _rentalsRepo.Delete(id);
-            return Ok();
+            return _rentalsRepo.GetAll();
         }
     }
 }
